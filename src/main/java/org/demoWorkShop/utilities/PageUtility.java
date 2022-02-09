@@ -1,13 +1,20 @@
 package org.demoWorkShop.utilities;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
 import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.awt.*;
+import java.util.Iterator;
+import java.util.Set;
+
 public class PageUtility {
+
     public void clickOnElement(WebElement element) {
         element.click();
     }
@@ -32,50 +39,138 @@ public class PageUtility {
         return element.getSize();
     }
 
-    public void selectDropDownByText(Select select, String value) {
+    public void selectDropDownByText(WebElement element, String value) {
+        Select select = new Select(element);
         select.selectByVisibleText(value);
     }
 
-    public void selectDropDownByIndex(Select select, int value) {
+    public void selectDropDownByIndex(WebElement element, int value) {
+        Select select = new Select(element);
         select.selectByIndex(value);
     }
 
-    public void selectDropDownByVisibleValue(Select select, String value) {
+    public void selectDropDownByVisibleValue(WebElement element, String value) {
+        Select select = new Select(element);
         select.selectByValue(value);
     }
 
+    public void selectDropDownByIsMultiple(WebElement element) {
+        Select select = new Select(element);
+        select.isMultiple();
+    }
 
-    public void acceptAlert(Alert alert) {
+    public void DropDownByDeselectAll(WebElement element) {
+        Select select = new Select(element);
+        select.deselectAll();
+    }
+
+    public void deselectDropDownByByValue(WebElement element, String value) {
+        Select select = new Select(element);
+        select.deselectByValue(value);
+    }
+
+    public void deselectDropDownByIndex(WebElement element, int value) {
+        Select select = new Select(element);
+        select.deselectByIndex(value);
+    }
+
+    public void deselectDropDownByText(WebElement element, String value) {
+        Select select = new Select(element);
+        select.deselectByVisibleText(value);
+    }
+
+    public void acceptAlert(WebDriver driver) {
+        Alert alert = driver.switchTo().alert();
         alert.accept();
     }
 
-    public String alertGetText(Alert alert) {
+    public String alertGetText(WebDriver driver) {
+        Alert alert = driver.switchTo().alert();
         return alert.getText();
     }
 
-    public void alertDismiss(Alert alert) {
+    public void alertDismiss(WebDriver driver) {
+        Alert alert = driver.switchTo().alert();
         alert.dismiss();
     }
 
-    public void alertPrompt(Alert alert, String value) {
+    public void alertPrompt(WebDriver driver, String value) {
+
+        Alert alert = driver.switchTo().alert();
         alert.sendKeys(value);
     }
 
-    public void doubleClick(WebElement element, Actions action) {
+    public void doubleClick(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver);
         action.doubleClick(element).build().perform();
     }
 
-    public void dragAndDrop(WebElement source, WebElement target, Actions action) {
+    public void dragAndDrop(WebDriver driver, WebElement source, WebElement target) {
+        Actions action = new Actions(driver);
         action.dragAndDrop(source, target).build().perform();
     }
 
-    public void dragAndDropByDragBy(WebElement source, Actions action, int x, int y) {
+    public void dragAndDropByDragBy(WebElement source, WebDriver driver, int x, int y) {
+        Actions action = new Actions(driver);
         action.dragAndDropBy(source, x, y);
 
     }
 
-    public void clickAndHold(WebElement drag, WebElement drop, Actions action) {
+    public void clickAndHold(WebDriver driver, WebElement drag, WebElement drop) {
+        Actions action = new Actions(driver);
         action.clickAndHold(drag).moveToElement(drop).build().perform();
     }
 
+
+    public void moveToElement(WebDriver driver, WebElement drag, WebElement drop) {
+        Actions action = new Actions(driver);
+        action.moveToElement(drop).build().perform();
+    }
+
+    public void mouseRightClick(WebDriver driver, WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.contextClick(element);
+    }
+
+    public void navigateForward(WebDriver driver) {
+        driver.navigate().forward();
+    }
+
+    public void navigateBackward(WebDriver driver) {
+        driver.navigate().back();
+    }
+
+    public void navigateRefresh(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+
+    public void navigateToNextPage(WebDriver driver, String url) {
+        driver.navigate().to(url);
+    }
+
+    public void frameByIndex(WebDriver driver, int i) {
+        Frame frame = new Frame();
+        driver.switchTo().frame(i);
+    }
+
+    public void frameByNameOrId(WebDriver driver, String value) {
+        Frame frame = new Frame();
+        driver.switchTo().frame(value);
+    }
+
+    public void frameByWebElement(WebDriver driver, WebElement element) {
+        Frame frame = new Frame();
+        driver.switchTo().frame(element);
+    }
+
+    public String windowHandlesTogetParent(WebDriver driver) {
+        return driver.getWindowHandle();
+
+    }
+
+    public Set<String> windowHandlesToGetChild(WebDriver driver) {
+        return driver.getWindowHandles();
+    }
 }
+
+

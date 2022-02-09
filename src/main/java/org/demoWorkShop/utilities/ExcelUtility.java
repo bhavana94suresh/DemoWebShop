@@ -15,6 +15,7 @@ public class ExcelUtility {
     public static XSSFWorkbook wb;
     public static XSSFSheet sh;
     public static FileInputStream f;
+
     public List<String> readDataFromExcel(String filePath, String sheetName) throws IOException {
         DataFormatter formatter = new DataFormatter();
         f = new FileInputStream(System.getProperty("user.dir") + filePath);
@@ -22,7 +23,7 @@ public class ExcelUtility {
         sh = wb.getSheet(sheetName);
         ArrayList<String> excelRows = new ArrayList<String>();
 
-        for(Row r : sh) {
+        for (Row r : sh) {
             for (Cell c : r) {
                 excelRows.add(formatter.formatCellValue(c));
             }
