@@ -1,4 +1,6 @@
 package org.demowebshop.testscripts;
 
-public class RegisterPageTest {
+import org.demoWebShop.automationcore.Base;
+
+public class RegisterPageTest extends Base {
 }
