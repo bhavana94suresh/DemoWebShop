@@ -28,8 +28,6 @@ public class LoginPage extends TestHelperUtility {
     private final String _loginButton="//input[@class='button-1 login-button']";
     @FindBy(xpath =_loginButton ) private WebElement loginButton;
 
-    private final String _actualUserName="//div[@class='header-links']//a[@class='account']";
-    @FindBy(xpath = _actualUserName) WebElement actualUserName;
 
     /**user action methods**/
 
@@ -46,9 +44,5 @@ public class LoginPage extends TestHelperUtility {
         return new UserAccountPage(driver);
     }
 
-    public String getActualUserName(){
-        return page.getElementText(actualUserName);
-
-    }
 
 }

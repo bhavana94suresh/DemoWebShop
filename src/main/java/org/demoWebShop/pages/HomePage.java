@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HomePage extends TestHelperUtility {
     WebDriver driver;
 
@@ -22,6 +24,12 @@ public class HomePage extends TestHelperUtility {
     @FindBy(xpath =_loginMenu )
     private WebElement loginMenu;
 
+    private final String _registerMenu="//a[@class='ico-register']";
+    @FindBy(xpath = _registerMenu) private WebElement registerMenu;
+
+    private final String _jewelleryMenu="top-menu-triangle";
+    @FindBy(className = _jewelleryMenu) private List<WebElement> jewelleryMenu;
+
     /**user Action Methods**/
 
     public String getHomePageTitle(){
@@ -32,5 +40,21 @@ public class HomePage extends TestHelperUtility {
     public LoginPage clickOnLoginMenu() {
         page.clickOnElement(loginMenu);
         return new LoginPage(driver);
+    }
+
+    public RegisterPage clickOnRegisterMenu(){
+        page.clickOnElement(registerMenu);
+       return new RegisterPage(driver) ;
+    }
+
+    public ProductListpage clickProductMenu(String text) {
+        for (int i = 0; i < jewelleryMenu.size(); i++) {
+            String value = jewelleryMenu.get(i).getText();
+            if (value.equals(text)) {
+                page.clickOnElement(jewelleryMenu.get(i));
+                break;
+            }
+        }
+        return new ProductListpage(driver);
     }
 }

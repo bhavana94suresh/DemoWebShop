@@ -50,7 +50,7 @@ public class PageUtility {
         select.selectByIndex(value);
     }
 
-    public void selectDropDownByVisibleValue(WebElement element, String value) {
+    public void selectDropDownByValue(WebElement element, String value) {
         Select select = new Select(element);
         select.selectByValue(value);
     }
